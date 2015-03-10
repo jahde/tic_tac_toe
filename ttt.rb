@@ -67,11 +67,29 @@ class Game
     end
   end
 
+  # def player_move(board_symbol)
+  #   puts "Choose your position:"
+  #   @position = gets.chomp.to_i # retrieves player moves
+  #   puts "You must pick a number between 1 and 9" unless @position.between?(0,10)
+  #   @fposition = @position - 1  # position minus one for the array pos
+  #   @grid.update_board(@fposition, board_symbol) #update the board with position and symbol
+  # end
+
   def player_move(board_symbol)
     puts "Choose your position:"
-    @position = gets.chomp  # retrieves player moves
-    @fposition = @position.to_i - 1  # position minus one for the array pos
+    check_for_integer
+    @fposition = @position - 1  # position minus one for the array pos
     @grid.update_board(@fposition, board_symbol) #update the board with position and symbol
+  end
+
+  def check_for_integer # picks new number
+    input = gets.chomp.to_i # retrieves player moves
+    if input.between?(1,10)
+      @position = input
+    else
+      puts "You must pick a number between 1 and 9"
+      check_for_integer  #using recursion to make sure they pick a number 1-9
+    end
   end
 end
 
@@ -99,14 +117,13 @@ class Board
     @board = Array.new(9, '-') # create a board with 9 empty cells
   end
 
-  def print_board # prints a new blank board each time
+  def print_board # prints a new blank board for the first time
     puts "\n"
     @board.each_slice(3) {|a| puts a.join(' | ')}
     puts "\n"
   end
 
-  # updates the board with the relevant positions
-  def update_board(pos, sym)
+  def update_board(pos, sym) # updates the board with the relevant positions and symbols
     @board[pos] = sym
     print_board
   end
