@@ -52,16 +52,26 @@ class Game
   end
 
   def continue_play
+    make_moves
+  end
+
+  def make_moves
+    # iterates through 9 possible moves alternating between players
     puts "\n"
     i = 0
     while i < 9
       puts "Turn " + (i+1).to_s + ":"
-        puts "Choose your position:"
-        @position = gets.chomp
-        @fposition = @position.to_i - 1
-        @grid.update_board(@fposition)
+        # counter to switch between players
+        i.to_i.even? ? player_move("X") : player_move("O")
       i += 1
     end
+  end
+
+  def player_move(board_symbol)
+    puts "Choose your position:"
+    @position = gets.chomp  # retrieves player moves
+    @fposition = @position.to_i - 1  # position minus one for the array pos
+    @grid.update_board(@fposition, board_symbol) #update the board with position and symbol
   end
 end
 
@@ -86,8 +96,7 @@ class Board
 
 
   def initialize
-    @empty_cell = '-' # board starts with all empty cells
-    @board = Array.new(9, @empty_cell) # create a board with 9 empty cells
+    @board = Array.new(9, '-') # create a board with 9 empty cells
   end
 
   def print_board # prints a new blank board each time
@@ -97,8 +106,8 @@ class Board
   end
 
   # updates the board with the relevant positions
-  def update_board(pos)
-    @board[pos] = "X"
+  def update_board(pos, sym)
+    @board[pos] = sym
     print_board
   end
 end
