@@ -56,6 +56,10 @@ class Game
     i = 0
     while i < 9
       puts "Turn " + (i+1).to_s + ":"
+        puts "Choose your position:"
+        @position = gets.chomp
+        @fposition = @position.to_i - 1
+        @grid.update_board(@fposition)
       i += 1
     end
   end
@@ -93,7 +97,9 @@ class Board
   end
 
   # updates the board with the relevant positions
-  def update_board
+  def update_board(pos)
+    @board[pos] = "X"
+    print_board
   end
 end
 
