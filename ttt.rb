@@ -96,20 +96,13 @@ class Game
 
     winning.each do |arr|  # iterate through each winning set
       if arr.all? {|num| @new_grid[num] == @last_move }  # if all values of the chosen set equal the player's symbol = WINNER
-        puts "You won, GAME OVER!"
+        announce_winner
+        #puts "You won, GAME OVER!"
         exit  # exit out of the program once we have a winner
       else
         next
       end
     end
-
-    # a.each do |arr|
-    #   if arr.all? {|num| num == @last_move }
-    #     puts "You won!"
-    #   else
-    #     next
-    #   end
-    # end
 
     # @@winning.each do |arr|
     #   arr.each do |n|
@@ -123,6 +116,11 @@ class Game
     #     # break if @pos != @last_move
     #   end
     # end
+  end
+
+  def announce_winner
+    puts "CONGRATULATIONS " + @player1.name + "! You won, GAME OVER" if (@last_move == "X")
+    puts "CONGRATULATIONS " + @player2.name + "! You won, GAME OVER" if (@last_move == "O")
   end
 end
 
