@@ -1,11 +1,9 @@
 class Player
-  # Each player must have a name and symbol attached.
-  # Symbol represents the game piece, either "X" or "O"
-  attr_accessor :name, :symbol
+  attr_accessor :name, :symbol  # Each player must have a name and symbol attached.
 
   def initialize(name, symbol)
     @name = name
-    @symbol = symbol
+    @symbol = symbol   # Symbol represents the game piece, either "X" or "O"
   end
 
   def say_hello()

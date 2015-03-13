@@ -1,6 +1,4 @@
 class Board
-  attr_reader :board, :empty_cell
-
   def initialize
     @board = Array.new(9, '-') # create a board with 9 empty cells
   end
